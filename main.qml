@@ -34,7 +34,7 @@ Window {
             Text {
                 anchors.fill: parent
                 id: resultText
-                text: qsTr("0")
+                text: qsTr("")
                 verticalAlignment: Text.AlignBottom
                 horizontalAlignment: Text.AlignRight
                 font.pixelSize: 40
@@ -61,7 +61,7 @@ Window {
 
         Repeater {
             id: numbers
-            model: [qsTr("7"), qsTr("8"), qsTr("9"), "4", "5", "6", "1", "2", "3"]
+            model: ["7", "8", "9", "4", "5", "6", "1", "2", "3"]
             CalcButton {
                 Layout.column: index % 3;
                 Layout.row: 2 + (index / 3);
@@ -86,6 +86,9 @@ Window {
             textHeight: 30;
             text: "=";
             Layout.margins: 5;
+            onClicked: {
+                resultText.text = calculatorLogic.evaluateExpression();
+            }
         }
 
         Repeater {
@@ -99,6 +102,9 @@ Window {
                 textHeight: 30;
                 text: modelData;
                 Layout.margins: 5;
+                onClicked: {
+                    resultText.text = calculatorLogic.onOtherOpsPressed(modelData);
+                }
             }
         }
     }

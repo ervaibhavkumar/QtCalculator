@@ -36,17 +36,48 @@ QString CalcLogic::arithmeticOpsPressed(const QString inputOp) noexcept {
     }
     return output;
 }
+QString CalcLogic::onOtherOpsPressed(const QString input) noexcept {
+    if (input == "0") return onNumberPressed(input);
+    else if (input == ".") return onDotPressed();
+    else {
+        Q_ASSERT(input == "C");
+        ResetAfterCalculation();
+        return output;
+    }
+}
 
-QString CalcLogic::EvaluateExpression() noexcept {
+QString CalcLogic::evaluateExpression() noexcept {
     return output;
 }
 
 QString CalcLogic::onDotPressed() noexcept {
+    if (operationType == NO_OPERATION) {
+        if (leftOperand.length() < 1) {
+            leftOperand.push_back("0.");
+        }
+        else {
+            if (!leftOperand.contains(".")) {
+                leftOperand.push_back(".");
+            }
+        }
+    }
+    else {
+        if (rightOperand.length() < 1) {
+            rightOperand.push_back("0.");
+        }
+        else {
+            if (!rightOperand.contains(".")) {
+                rightOperand.push_back(".");
+            }
+        }
+    }
+    updateOutput();
     return output;
 }
 
 void CalcLogic::ResetAfterCalculation() noexcept {
-
+    leftOperand = rightOperand = output = "";
+    operationType = NO_OPERATION;
 }
 
 void CalcLogic::updateOutput() noexcept {
@@ -83,6 +114,6 @@ void CalcLogic::updateOutput() noexcept {
     }
 
     if (output.length() < 1) {
-        output = "0";
+        output = "";
     }
 }

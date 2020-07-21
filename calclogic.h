@@ -12,8 +12,9 @@ public:
 
     Q_INVOKABLE QString onNumberPressed( const QString inputNumber ) noexcept;
     Q_INVOKABLE QString arithmeticOpsPressed( const QString inputOp ) noexcept;
-    Q_INVOKABLE QString EvaluateExpression() noexcept;
+    Q_INVOKABLE QString evaluateExpression() noexcept;
     Q_INVOKABLE QString onDotPressed() noexcept;
+    Q_INVOKABLE QString onOtherOpsPressed(const QString input) noexcept;
 
 
 private:
