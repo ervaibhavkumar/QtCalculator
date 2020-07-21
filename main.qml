@@ -53,13 +53,15 @@ Window {
                 textHeight: 30;
                 text: modelData;
                 Layout.margins: 5;
-                onClicked: console.log(modelData);
+                onClicked: {
+                    resultText.text = calculatorLogic.arithmeticOpsPressed(modelData);
+                }
             }
         }
 
         Repeater {
             id: numbers
-            model: ["7", "8", "9", "4", "5", "6", "1", "2", "3"]
+            model: [qsTr("7"), qsTr("8"), qsTr("9"), "4", "5", "6", "1", "2", "3"]
             CalcButton {
                 Layout.column: index % 3;
                 Layout.row: 2 + (index / 3);

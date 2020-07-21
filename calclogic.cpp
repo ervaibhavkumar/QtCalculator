@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "calclogic.h"
 
 CalcLogic::CalcLogic(QObject *parent) noexcept : QObject(parent),
@@ -9,17 +11,29 @@ CalcLogic::CalcLogic(QObject *parent) noexcept : QObject(parent),
 CalcLogic::~CalcLogic() noexcept = default;
 
 QString CalcLogic::onNumberPressed(const QString inputNumber) noexcept {
-    if (operationType != NO_OPERATION) {
-        leftOperand.append(inputNumber);
+    if (operationType == NO_OPERATION) {
+        leftOperand.push_back(inputNumber);
     }
     else {
-        rightOperand.append(inputNumber);
+        rightOperand.push_back(inputNumber);
     }
     updateOutput();
     return output;
 }
 
-QString CalcLogic::ArithmeticOpsPressed(const QString inputOp) noexcept {
+QString CalcLogic::arithmeticOpsPressed(const QString inputOp) noexcept {
+    if (leftOperand.length() >= 1) {
+        if (operationType == NO_OPERATION) {
+            if (inputOp == "+") operationType = ADD_OPERATION;
+            else if (inputOp == "-") operationType = SUBTRACT_OPERATION;
+            else if (inputOp == "*") operationType = MULTIPLY_OPERATION;
+            else {
+                Q_ASSERT(inputOp == "/");
+                operationType = DIVISION_OPERATION;
+            }
+        }
+        updateOutput();
+    }
     return output;
 }
 
@@ -38,7 +52,7 @@ void CalcLogic::ResetAfterCalculation() noexcept {
 void CalcLogic::updateOutput() noexcept {
     output = "";
 
-    if (leftOperand.size() > 0) {
+    if (leftOperand.length() > 0) {
         output += leftOperand;
     }
 
@@ -64,11 +78,11 @@ void CalcLogic::updateOutput() noexcept {
         }
     }
 
-    if (rightOperand.size() > 0) {
+    if (rightOperand.length() > 0) {
         output += rightOperand;
     }
 
-    if (output.size() < 1) {
+    if (output.length() < 1) {
         output = "0";
     }
 }

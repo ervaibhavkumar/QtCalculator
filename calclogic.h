@@ -11,7 +11,7 @@ public:
     virtual ~CalcLogic() noexcept;
 
     Q_INVOKABLE QString onNumberPressed( const QString inputNumber ) noexcept;
-    Q_INVOKABLE QString ArithmeticOpsPressed( const QString inputOp ) noexcept;
+    Q_INVOKABLE QString arithmeticOpsPressed( const QString inputOp ) noexcept;
     Q_INVOKABLE QString EvaluateExpression() noexcept;
     Q_INVOKABLE QString onDotPressed() noexcept;
 
