@@ -8,16 +8,18 @@ Rectangle {
     border.color: "white"
     implicitHeight: text.height
     implicitWidth: text.width
+    signal clicked;
     Text {
         id: text
         color: "black"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         anchors.fill: parent
+    }
 
-        MouseArea {
-            id: mouse;
-            anchors.fill: parent
-        }
+    MouseArea {
+        id: mouse;
+        anchors.fill: parent
+        onClicked: button.clicked();
     }
 }

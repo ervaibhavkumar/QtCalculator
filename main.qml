@@ -2,6 +2,8 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.0
 
+import CalcLogic 1.0
+
 Window {
     visible: true
     width: 350
@@ -9,9 +11,14 @@ Window {
     title: qsTr("QtCalculator")
     color: "#f1c27d"
 
+    CalcLogic {
+        id: calculatorLogic
+    }
+
     GridLayout {
         anchors.fill: parent
-        columnSpacing: 5;
+        columnSpacing: 0;
+        rowSpacing: 0;
         columns: 4;
 
         Rectangle {
@@ -45,7 +52,8 @@ Window {
                 height: 60;
                 textHeight: 30;
                 text: modelData;
-                Layout.margins: 3;
+                Layout.margins: 5;
+                onClicked: console.log(modelData);
             }
         }
 
@@ -59,20 +67,23 @@ Window {
                 height: 60;
                 textHeight: 30;
                 text: modelData;
-                Layout.margins: 3;
+                Layout.margins: 5;
+                onClicked: {
+                    resultText.text = calculatorLogic.onNumberPressed(modelData);
+                }
             }
         }
 
         CalcButton {
             id: equals
-            Layout.column: 4;
+            Layout.column: 3;
             Layout.row: 2;
             Layout.rowSpan: 4;
             Layout.fillWidth: true;
             Layout.fillHeight: true;
             textHeight: 30;
             text: "=";
-            Layout.margins: 3;
+            Layout.margins: 5;
         }
 
         Repeater {
@@ -85,7 +96,7 @@ Window {
                 height: 60;
                 textHeight: 30;
                 text: modelData;
-                Layout.margins: 3;
+                Layout.margins: 5;
             }
         }
     }

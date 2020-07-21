@@ -23,6 +23,8 @@ CppApplication {
 
     files: [
         "CalcButton.qml",
+        "calclogic.cpp",
+        "calclogic.h",
         "main.cpp",
         "main.qml",
         "qml.qrc",
