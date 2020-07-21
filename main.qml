@@ -9,7 +9,7 @@ Window {
     width: 350
     height: 450
     title: qsTr("QtCalculator")
-    color: "#f1c27d"
+    color: "#ffff8d"
 
     CalcLogic {
         id: calculatorLogic
@@ -29,7 +29,8 @@ Window {
             Layout.fillWidth: true
             height: 90
             border.width: 2;
-            border.color: "red";
+            border.color: "white";
+            color: "#42a5f5";
 
             Text {
                 anchors.fill: parent
@@ -39,6 +40,7 @@ Window {
                 horizontalAlignment: Text.AlignRight
                 font.pixelSize: 40
                 anchors.margins: 5;
+                font.family: "Fantasy";
             }
         }
 
@@ -53,6 +55,7 @@ Window {
                 textHeight: 30;
                 text: modelData;
                 Layout.margins: 5;
+                color: "#ff9e80"
                 onClicked: {
                     resultText.text = calculatorLogic.arithmeticOpsPressed(modelData);
                 }
@@ -70,6 +73,7 @@ Window {
                 textHeight: 30;
                 text: modelData;
                 Layout.margins: 5;
+                color: "#ff9e80";
                 onClicked: {
                     resultText.text = calculatorLogic.onNumberPressed(modelData);
                 }
@@ -86,6 +90,7 @@ Window {
             textHeight: 30;
             text: "=";
             Layout.margins: 5;
+            color: "#66bb6a";
             onClicked: {
                 resultText.text = calculatorLogic.evaluateExpression();
             }
@@ -102,6 +107,7 @@ Window {
                 textHeight: 30;
                 text: modelData;
                 Layout.margins: 5;
+                color: "#ff9e80";
                 onClicked: {
                     resultText.text = calculatorLogic.onOtherOpsPressed(modelData);
                 }

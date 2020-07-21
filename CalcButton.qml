@@ -15,6 +15,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         anchors.fill: parent
+        font.family: "Helvetica"
     }
 
     MouseArea {

@@ -47,6 +47,40 @@ QString CalcLogic::onOtherOpsPressed(const QString input) noexcept {
 }
 
 QString CalcLogic::evaluateExpression() noexcept {
+    if (leftOperand.length() < 1 || operationType == NO_OPERATION || rightOperand.length() < 1) return output;
+
+    const double val1 = leftOperand.toDouble();
+    const double val2 = rightOperand.toDouble();
+
+    switch (operationType) {
+        case ADD_OPERATION: {
+            const auto result = val1 + val2;
+            output = QString::number(result);
+            break;
+        }
+        case SUBTRACT_OPERATION: {
+            const auto result = val1 - val2;
+            output = QString::number(result);
+            break;
+        }
+        case MULTIPLY_OPERATION: {
+            const auto result = val1 * val2;
+            output = QString::number(result);
+            break;
+        }
+        default: {
+            Q_ASSERT(operationType == DIVISION_OPERATION);
+            if (val2 == 0.0) {
+                output = "Invalid expression";
+            }
+            else {
+                const auto result = val1 / val2;
+                output = QString::number(result);
+                break;
+            }
+        }
+    }
+    calculationDone();
     return output;
 }
 
@@ -77,6 +111,11 @@ QString CalcLogic::onDotPressed() noexcept {
 
 void CalcLogic::ResetAfterCalculation() noexcept {
     leftOperand = rightOperand = output = "";
+    operationType = NO_OPERATION;
+}
+
+void CalcLogic::calculationDone() noexcept {
+    leftOperand = rightOperand = "";
     operationType = NO_OPERATION;
 }
 

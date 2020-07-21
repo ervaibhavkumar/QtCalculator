@@ -31,6 +31,7 @@ private:
 
     void ResetAfterCalculation() noexcept;
     void updateOutput() noexcept;
+    void calculationDone() noexcept;
 
 signals:
 
